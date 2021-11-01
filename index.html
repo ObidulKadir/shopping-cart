@@ -128,17 +128,28 @@
 
       //total amount showed here.
       function totalAmount(){
-         const firstProduct = parseFloat(document.getElementById('currentAmount').innerText);
-         const secondProduct = parseFloat(document.getElementById('secondProductValue').innerText)
+         const firstProduct = document.getElementById('currentAmount');
+         const secondProduct = document.getElementById('secondProductValue');
 
-         const TotalBalance =  firstProduct + secondProduct;
-         
-         document.getElementById('subTotalAmount').innerText = TotalBalance;
-         document.getElementById('totalAmount').innerText =TotalBalance;
+         if( firstProduct != null && secondProduct != null){
+            const totalBalance =  parseFloat(firstProduct.innerText) + parseFloat(secondProduct.innerText);
+            document.getElementById('subTotalAmount').innerText = totalBalance;
+            document.getElementById('totalAmount').innerText =totalBalance;
+         }
+         if(firstProduct == null && secondProduct != null){
+            
+            const totalBalance = parseFloat(secondProduct.innerText);
+            document.getElementById('subTotalAmount').innerText = totalBalance;
+            document.getElementById('totalAmount').innerText =totalBalance;
+         }
+         if(firstProduct != null && secondProduct == null){
+            
+            const totalBalance = parseFloat(firstProduct.innerText);
+            document.getElementById('subTotalAmount').innerText = totalBalance;
+            document.getElementById('totalAmount').innerText =totalBalance;
+         }
+ 
       }
-
-     
-
       // add a  product on cart
       function addProduct(id,productAmount){
          const productNumber =  parseInt(productAmount);
@@ -166,12 +177,11 @@
          document.getElementById(id).innerText = productCurrentAmount;
          return productCurrentAmount;
       }
-      // total amount
-      
+    
       // remove product
       function removeProduct(id, CurrentProduct){
          const cartItem  = document.getElementById(id);
-         console.log(cartItem)
+         // console.log(cartItem)
          
          const removeItem = parseFloat(document.getElementById(CurrentProduct).innerText);  
          
